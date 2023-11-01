@@ -49,7 +49,7 @@ namespace CanchaApp.Controllers
         public IActionResult Create()
         {
             ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id");
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace CanchaApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id", turnoReservado.IdUsuario);
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
 
@@ -85,7 +85,7 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
             ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id", turnoReservado.IdUsuario);
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
 
@@ -122,7 +122,7 @@ namespace CanchaApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuarios, "Id", "Id", turnoReservado.IdUsuario);
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
 

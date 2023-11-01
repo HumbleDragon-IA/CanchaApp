@@ -9,32 +9,32 @@ using CanchaApp.Modelo;
 
 namespace CanchaApp.Controllers
 {
-    public class UsuariosController : Controller
+    public class UsuarioController : Controller
     {
         private readonly CanchaAppContext _context;
 
-        public UsuariosController(CanchaAppContext context)
+        public UsuarioController(CanchaAppContext context)
         {
             _context = context;
         }
 
-        // GET: Usuarios
+        // GET: Usuario
         public async Task<IActionResult> Index()
         {
-              return _context.Usuarios != null ? 
-                          View(await _context.Usuarios.ToListAsync()) :
-                          Problem("Entity set 'CanchaAppContext.Usuarios'  is null.");
+              return _context.Usuario != null ? 
+                          View(await _context.Usuario.ToListAsync()) :
+                          Problem("Entity set 'CanchaAppContext.Usuario'  is null.");
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Usuario/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null || _context.Usuario == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
+            var usuario = await _context.Usuario
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -44,13 +44,13 @@ namespace CanchaApp.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Create
+        // GET: Usuario/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Usuario/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,15 +66,15 @@ namespace CanchaApp.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Usuario/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null || _context.Usuario == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -82,7 +82,7 @@ namespace CanchaApp.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Usuario/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,15 +117,15 @@ namespace CanchaApp.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Usuario/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null || _context.Usuario == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
+            var usuario = await _context.Usuario
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -135,19 +135,19 @@ namespace CanchaApp.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Usuarios == null)
+            if (_context.Usuario == null)
             {
-                return Problem("Entity set 'CanchaAppContext.Usuarios'  is null.");
+                return Problem("Entity set 'CanchaAppContext.Usuario'  is null.");
             }
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
             if (usuario != null)
             {
-                _context.Usuarios.Remove(usuario);
+                _context.Usuario.Remove(usuario);
             }
             
             await _context.SaveChangesAsync();
@@ -156,7 +156,7 @@ namespace CanchaApp.Controllers
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

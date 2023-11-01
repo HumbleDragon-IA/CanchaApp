@@ -15,7 +15,7 @@ public partial class Usuario
 
     public bool? Admin { get; set; }
 
-    public virtual ICollection<ComentarioUsuario> ComentarioUsuarios { get; set; } = new List<ComentarioUsuario>();
+    public virtual ICollection<ComentarioUsuario> ComentarioUsuario { get; set; } = new List<ComentarioUsuario>();
 
     public virtual ICollection<TurnoReservado> TurnoReservados { get; set; } = new List<TurnoReservado>();
 }

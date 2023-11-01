@@ -21,7 +21,7 @@ public partial class CanchaAppContext : DbContext
 
     public virtual DbSet<Comentario> Comentarios { get; set; }
 
-    public virtual DbSet<ComentarioUsuario> ComentarioUsuarios { get; set; }
+    public virtual DbSet<ComentarioUsuario> ComentarioUsuario { get; set; }
 
     public virtual DbSet<TipoPiso> TipoPisos { get; set; }
 
@@ -29,7 +29,7 @@ public partial class CanchaAppContext : DbContext
 
     public virtual DbSet<TurnoReservado> TurnoReservados { get; set; }
 
-    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<VistaGeneralTurnosReservado> VistaGeneralTurnosReservados { get; set; }
   
@@ -85,12 +85,12 @@ public partial class CanchaAppContext : DbContext
             entity.Property(e => e.IdUser).HasColumnName("idUser");
             entity.Property(e => e.IdComentario).HasColumnName("idComentario");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ComentarioUsuarios)
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ComentarioUsuario)
                 .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_comentarioUsuario_Comentario");
 
-            entity.HasOne(d => d.IdUser1).WithMany(p => p.ComentarioUsuarios)
+            entity.HasOne(d => d.IdUser1).WithMany(p => p.ComentarioUsuario)
                 .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_comentarioUsuario_user");
