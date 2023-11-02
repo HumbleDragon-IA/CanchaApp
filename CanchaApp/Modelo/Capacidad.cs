@@ -9,5 +9,5 @@ public partial class Capacidad
 
     public int? Tamaño { get; set; }
 
-    public virtual ICollection<Cancha> Canchas { get; set; } = new List<Cancha>();
+    public virtual ICollection<Cancha> Cancha { get; set; } = new List<Cancha>();
 }

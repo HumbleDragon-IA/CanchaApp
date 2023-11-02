@@ -1,4 +1,5 @@
-﻿using CanchaApp.Models;
+﻿using CanchaApp.Modelo;
+using CanchaApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,6 +23,19 @@ namespace CanchaApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Usuario()
+        {
+            return View();
+        }
+
+       public IActionResult TurnoReservado()
+        {
+
+           return View();
+        }
+       
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

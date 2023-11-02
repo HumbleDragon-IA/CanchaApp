@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CanchaApp.Modelo;
 
 public partial class VistaGeneralTurnosReservado
 {
+    
+    public int  idVista { get; set; }
+    
     public string? NombreUsuario { get; set; }
 
     public string? ApellidoUsuario { get; set; }

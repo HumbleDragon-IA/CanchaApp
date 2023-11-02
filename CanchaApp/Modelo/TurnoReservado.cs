@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
+
 
 namespace CanchaApp.Modelo;
 
@@ -16,4 +19,7 @@ public partial class TurnoReservado
     public virtual Cancha IdCanchaNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
+   
+
 }

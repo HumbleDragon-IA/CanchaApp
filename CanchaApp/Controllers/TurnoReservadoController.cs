@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanchaApp.Modelo;
+using System.Configuration;
 
 namespace CanchaApp.Controllers
 {
@@ -18,10 +19,11 @@ namespace CanchaApp.Controllers
             _context = context;
         }
 
+       
         // GET: TurnoReservadoes
         public async Task<IActionResult> Index()
         {
-            var canchaAppContext = _context.TurnoReservados.Include(t => t.IdCanchaNavigation).Include(t => t.IdUsuarioNavigation);
+            var canchaAppContext = _context.TurnoReservados.Include(t => t.IdCanchaNavigation).Include(t => t.IdUsuarioNavigation).Include(t => t.IdCanchaNavigation.IdCapacidadNavigation).Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation);
             return View(await canchaAppContext.ToListAsync());
         }
 
@@ -48,7 +50,7 @@ namespace CanchaApp.Controllers
         // GET: TurnoReservadoes/Create
         public IActionResult Create()
         {
-            ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id");
+            ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id");
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id");
             return View();
         }
@@ -58,7 +60,7 @@ namespace CanchaApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUsuario,IdTurno,IdCancha")] TurnoReservado turnoReservado)
+        public async Task<IActionResult> Create([Bind("Id,Usuario,Horario,Numero de Cancha")] TurnoReservado turnoReservado)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +68,7 @@ namespace CanchaApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
+            ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
@@ -84,7 +86,7 @@ namespace CanchaApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
+            ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
@@ -121,7 +123,7 @@ namespace CanchaApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCancha"] = new SelectList(_context.Canchas, "Id", "Id", turnoReservado.IdCancha);
+            ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             return View(turnoReservado);
         }
@@ -168,6 +170,19 @@ namespace CanchaApp.Controllers
         private bool TurnoReservadoExists(int id)
         {
           return (_context.TurnoReservados?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+       
+        private String mostrarPiso(Cancha c)
+        {
+            String p = c.IdTipoPisoNavigation.TipoPiso1;
+            
+            return p;
+        }
+
+        private int mostrarTamaño(Cancha c)
+        {
+            int t = (int)c.IdCapacidadNavigation.Tamaño;
+            return t;
         }
     }
 }

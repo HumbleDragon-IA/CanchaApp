@@ -8,6 +8,7 @@ public partial class CanchaAppContext : DbContext
 {
     public CanchaAppContext()
     {
+
     }
 
     public CanchaAppContext(DbContextOptions<CanchaAppContext> options)
@@ -15,9 +16,9 @@ public partial class CanchaAppContext : DbContext
     {
     }
 
-    public virtual DbSet<Cancha> Canchas { get; set; }
+    public virtual DbSet<Cancha> Cancha { get; set; }
 
-    public virtual DbSet<Capacidad> Capacidads { get; set; }
+    public virtual DbSet<Capacidad> Capacidad { get; set; }
 
     public virtual DbSet<Comentario> Comentarios { get; set; }
 
@@ -47,12 +48,12 @@ public partial class CanchaAppContext : DbContext
             entity.Property(e => e.IdCapacidad).HasColumnName("idCapacidad");
             entity.Property(e => e.IdTipoPiso).HasColumnName("idTipoPiso");
 
-            entity.HasOne(d => d.IdCapacidadNavigation).WithMany(p => p.Canchas)
+            entity.HasOne(d => d.IdCapacidadNavigation).WithMany(p => p.Cancha)
                 .HasForeignKey(d => d.IdCapacidad)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Cancha_capacidad");
 
-            entity.HasOne(d => d.IdTipoPisoNavigation).WithMany(p => p.Canchas)
+            entity.HasOne(d => d.IdTipoPisoNavigation).WithMany(p => p.Cancha)
                 .HasForeignKey(d => d.IdTipoPiso)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Cancha_TipoPiso");
@@ -127,6 +128,7 @@ public partial class CanchaAppContext : DbContext
             entity.Property(e => e.IdTurno).HasColumnName("idTurno");
             entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 
+          
             entity.HasOne(d => d.IdCanchaNavigation).WithMany(p => p.TurnoReservados)
                 .HasForeignKey(d => d.IdCancha)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -136,6 +138,11 @@ public partial class CanchaAppContext : DbContext
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TurnoReservado_usuario");
+
+          
+
+         
+
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -181,4 +188,6 @@ public partial class CanchaAppContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    
 }

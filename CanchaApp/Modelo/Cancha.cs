@@ -18,4 +18,9 @@ public partial class Cancha
     public virtual TipoPiso IdTipoPisoNavigation { get; set; } = null!;
 
     public virtual ICollection<TurnoReservado> TurnoReservados { get; set; } = new List<TurnoReservado>();
+
+
+
+    
+    
 }
