@@ -19,7 +19,7 @@ namespace CanchaApp.Controllers
             _context = context;
         }
 
-       
+
         // GET: TurnoReservadoes
         public async Task<IActionResult> Index()
         {
@@ -60,17 +60,17 @@ namespace CanchaApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Usuario,Horario,Numero de Cancha")] TurnoReservado turnoReservado)
+        public async Task<IActionResult> Create([Bind("Id,IdUsuario,IdTurno,IdCancha")] TurnoReservado turnoReservado)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(turnoReservado);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            // if (ModelState.IsValid)
+            //  {
+            _context.Add(turnoReservado);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //   }
             ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
-            return View(turnoReservado);
+            //   return View(turnoReservado);
         }
 
         // GET: TurnoReservadoes/Edit/5
@@ -162,20 +162,20 @@ namespace CanchaApp.Controllers
             {
                 _context.TurnoReservados.Remove(turnoReservado);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TurnoReservadoExists(int id)
         {
-          return (_context.TurnoReservados?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TurnoReservados?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-       
+
         private String mostrarPiso(Cancha c)
         {
             String p = c.IdTipoPisoNavigation.TipoPiso1;
-            
+
             return p;
         }
 
