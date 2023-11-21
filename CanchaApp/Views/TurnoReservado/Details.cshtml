@@ -10,22 +10,24 @@
     <h4>TurnoReservado</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdTurno)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdTurno)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanchaNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño) -
+            @Html.DisplayNameFor(model => model.IdCanchaNavigation.IdTipoPisoNavigation.TipoPiso1)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanchaNavigation.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño) -
+            @Html.DisplayFor(model => model.IdCanchaNavigation.IdTipoPisoNavigation.TipoPiso1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdUsuarioNavigation.Id)
         </dd>
     </dl>

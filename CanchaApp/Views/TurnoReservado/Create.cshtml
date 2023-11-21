@@ -14,17 +14,37 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class ="form-control" asp-items="ViewBag.IdUsuario"></select>
+                <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.IdUsuario"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdTurno" class="control-label"></label>
-                <input asp-for="IdTurno" class="form-control" />
+                @* <input asp-for="IdTurno" class="form-control" /> *@
+                <select asp-for="IdTurno" class="form-control" id="IdTurnoSelect">
+                    <option value="">Seleccione un Turno</option>
+                    @{
+                        foreach (var turnos in ViewBag.Turnos)
+                        {
+                            <option value="@turnos.Id">@turnos.HoraInicio</option>
+                        }
+                    }
+                </select>
+
                 <span asp-validation-for="IdTurno" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCancha" class="control-label"></label>
-                <select asp-for="IdCancha" class ="form-control" asp-items="ViewBag.IdCancha"></select>
+                @*  <select asp-for="IdCancha" class ="form-control" asp-items="ViewBag.IdCancha"></select> *@
+                <select asp-for="IdCancha" class="form-control" id="IdCanchaSelect">
+                    <option value="">Seleccione una Cancha</option>
+                    @{
+                        foreach (var canchas in ViewBag.Canchas)
+                        {
+                            <option value="@canchas.cancha.Id">@canchas.piso @canchas.capacidad</option>
+                        }
+                    }
+                </select>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -37,5 +57,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
