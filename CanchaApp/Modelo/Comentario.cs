@@ -9,5 +9,5 @@ public partial class Comentario
 
     public string? Descripcion { get; set; }
 
-    public virtual ICollection<ComentarioUsuario> ComentarioUsuario { get; set; } = new List<ComentarioUsuario>();
+   
 }

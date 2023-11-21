@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanchaApp.Modelo;
 using System.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CanchaApp.Controllers
 {
@@ -57,6 +58,8 @@ namespace CanchaApp.Controllers
                 .Include(t => t.IdUsuarioNavigation)
                 .Include(t => t.IdCanchaNavigation.IdCapacidadNavigation)
                 .Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation)
+                
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (turnoReservado == null)
             {
@@ -71,8 +74,10 @@ namespace CanchaApp.Controllers
         {
             ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id");
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id");
+            ViewData["IdTurno"] = new SelectList(_context.Usuario, "Id", "Id");
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
+            ViewBag.Usuarios = obtenerUsuario();
             return View();
         }
 
@@ -87,12 +92,15 @@ namespace CanchaApp.Controllers
             //  {
             _context.Add(turnoReservado);
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
             //   }
             ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
+            ViewData["IdTurno"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdTurno);
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
+            ViewBag.Usuarios = obtenerUsuario();
             //   return View(turnoReservado);
         }
 
@@ -113,6 +121,7 @@ namespace CanchaApp.Controllers
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
+            ViewBag.Usuarios = obtenerUsuario();
             return View(turnoReservado);
         }
 
@@ -128,15 +137,15 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
-            // if (ModelState.IsValid)
+           // if (ModelState.IsValid)
             {
-                //  try
-                // {
-                _context.Update(turnoReservado);
-                await _context.SaveChangesAsync();
-                // }
-                // catch (DbUpdateConcurrencyException)
-                // {
+                try
+                {
+                    _context.Update(turnoReservado);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                { Console.WriteLine("aca rompe"); }
                 //    if (!TurnoReservadoExists(turnoReservado.Id))
                 //   {
                 //      return NotFound();
@@ -152,6 +161,7 @@ namespace CanchaApp.Controllers
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
+            ViewBag.Usuarios = obtenerUsuario();
             // return View(turnoReservado);
         }
 
@@ -163,10 +173,14 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
+
             var turnoReservado = await _context.TurnoReservados
                 .Include(t => t.IdCanchaNavigation)
                 .Include(t => t.IdUsuarioNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var usuario = _context.Usuario.Where(u => u.Id == turnoReservado.IdUsuario);
+ 
             if (turnoReservado == null)
             {
                 return NotFound();
@@ -174,6 +188,8 @@ namespace CanchaApp.Controllers
 
             return View(turnoReservado);
         }
+
+      
 
         // POST: TurnoReservadoes/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -184,6 +200,8 @@ namespace CanchaApp.Controllers
             {
                 return Problem("Entity set 'CanchaAppContext.TurnoReservados'  is null.");
             }
+
+           
             var turnoReservado = await _context.TurnoReservados.FindAsync(id);
             if (turnoReservado != null)
             {
@@ -211,6 +229,11 @@ namespace CanchaApp.Controllers
             return _context.Cancha.ToList();
         }
 
+        public List<Usuario> obtenerUsuario()
+        {
+            return _context.Usuario.ToList();
+        }
+
         public List<CanchaAux> obtenerCanchaAux()
         {
             List<CanchaAux> canchaAuxes = new List<CanchaAux>();
@@ -229,6 +252,11 @@ namespace CanchaApp.Controllers
                 });
             }
             return canchaAuxes;
+        }
+
+        private Boolean tieneTurno(Usuario  u)
+        {
+            return !u.TurnoReservados.IsNullOrEmpty();
         }
     }
     public class CanchaAux

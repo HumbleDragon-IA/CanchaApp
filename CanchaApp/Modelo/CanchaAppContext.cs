@@ -22,8 +22,6 @@ public partial class CanchaAppContext : DbContext
 
     public virtual DbSet<Comentario> Comentarios { get; set; }
 
-    public virtual DbSet<ComentarioUsuario> ComentarioUsuario { get; set; }
-
     public virtual DbSet<TipoPiso> TipoPisos { get; set; }
 
     public virtual DbSet<Turno> Turnos { get; set; }
@@ -77,25 +75,7 @@ public partial class CanchaAppContext : DbContext
                 .HasColumnName("descripcion");
         });
 
-        modelBuilder.Entity<ComentarioUsuario>(entity =>
-        {
-            entity.HasKey(e => new { e.IdUser, e.IdComentario });
-
-            entity.ToTable("comentarioUsuario");
-
-            entity.Property(e => e.IdUser).HasColumnName("idUser");
-            entity.Property(e => e.IdComentario).HasColumnName("idComentario");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ComentarioUsuario)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_comentarioUsuario_Comentario");
-
-            entity.HasOne(d => d.IdUser1).WithMany(p => p.ComentarioUsuario)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_comentarioUsuario_user");
-        });
+        
 
         modelBuilder.Entity<TipoPiso>(entity =>
         {

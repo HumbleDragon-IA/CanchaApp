@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanchaApp.Modelo;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CanchaApp.Controllers
 {
@@ -145,10 +147,23 @@ namespace CanchaApp.Controllers
                 return Problem("Entity set 'CanchaAppContext.Usuario'  is null.");
             }
             var usuario = await _context.Usuario.FindAsync(id);
+            var turnos = obtenerTurnoR() ;
+
+
             if (usuario != null)
             {
-                _context.Usuario.Remove(usuario);
-            }
+               
+                    foreach (var tur in turnos)
+                    {
+                        if (tur.IdUsuario == usuario.Id)
+                        {
+                            _context.TurnoReservados.Remove(tur);
+                        }
+                    }
+
+                    _context.Usuario.Remove(usuario);
+                
+           }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -158,5 +173,10 @@ namespace CanchaApp.Controllers
         {
           return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public List<TurnoReservado> obtenerTurnoR()
+        {
+            return _context.TurnoReservados.ToList();
+        }
     }
+   
 }
