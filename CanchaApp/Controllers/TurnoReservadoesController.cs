@@ -23,7 +23,7 @@ namespace CanchaApp.Controllers
         // GET: TurnoReservadoes
         public async Task<IActionResult> Index(string orderBy)
         {
-            var canchaAppContext = _context.TurnoReservados.Include(t => t.IdCanchaNavigation).Include(t => t.IdUsuarioNavigation).Include(t => t.IdCanchaNavigation.IdCapacidadNavigation).Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation);
+            var canchaAppContext = _context.TurnoReservados.Include(t => t.IdCanchaNavigation).Include(t => t.IdUsuarioNavigation).Include(t => t.IdCanchaNavigation.IdCapacidadNavigation).Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation).Include(t => t.IdTurnoNavigation);
             var canchas = await canchaAppContext.ToListAsync();
             if (!string.IsNullOrEmpty(orderBy))
             {
@@ -57,6 +57,8 @@ namespace CanchaApp.Controllers
                 .Include(t => t.IdUsuarioNavigation)
                 .Include(t => t.IdCanchaNavigation.IdCapacidadNavigation)
                 .Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation)
+                .Include(t => t.IdTurnoNavigation)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (turnoReservado == null)
             {
@@ -128,15 +130,15 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
-            // if (ModelState.IsValid)
+           // if (ModelState.IsValid)
             {
-                //  try
-                // {
-                _context.Update(turnoReservado);
-                await _context.SaveChangesAsync();
-                // }
-                // catch (DbUpdateConcurrencyException)
-                // {
+                try
+                {
+                    _context.Update(turnoReservado);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                { Console.WriteLine("aca rompe"); }
                 //    if (!TurnoReservadoExists(turnoReservado.Id))
                 //   {
                 //      return NotFound();
@@ -230,6 +232,7 @@ namespace CanchaApp.Controllers
             }
             return canchaAuxes;
         }
+
     }
     public class CanchaAux
     {

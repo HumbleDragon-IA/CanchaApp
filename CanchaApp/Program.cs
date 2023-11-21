@@ -2,7 +2,7 @@ using CanchaApp.Modelo;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<CanchaAppContext>(options => options.UseSqlServer(builder.Configuration["Server=(localdb)\\MSSQLLocalDB;Database=CanchaApp;Trusted_Connection=True;"]));
+builder.Services.AddDbContext<CanchaAppContext>(options => options.UseSqlServer(builder.Configuration["Server=(localdb)\\MSSQLLocalDB;Database=CanchaAppPrueba;Trusted_Connection=True;"]));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

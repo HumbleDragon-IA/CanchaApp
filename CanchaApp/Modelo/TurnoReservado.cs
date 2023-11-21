@@ -20,6 +20,6 @@ public partial class TurnoReservado
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
-   
+    public virtual Turno IdTurnoNavigation { get; set; } = null!;
 
 }
