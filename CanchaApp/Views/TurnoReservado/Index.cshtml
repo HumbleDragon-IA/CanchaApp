@@ -7,7 +7,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Listado de Turnos</h1>
 <table style="width:100%">
     <tr>
         <td style="width:10%">
@@ -76,9 +76,9 @@
                     @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nombre)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar Turno</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar Turno</a>
                 </td>
             </tr>
         }

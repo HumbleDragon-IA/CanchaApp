@@ -155,9 +155,19 @@ namespace CanchaApp.Controllers
             {
                 return Problem("Entity set 'CanchaAppContext.Cancha'  is null.");
             }
+
             var cancha = await _context.Cancha.FindAsync(id);
+            var turnos = obtenerTurnoR();
             if (cancha != null)
             {
+                foreach (var tur in turnos)
+                {
+                    if (tur.IdCancha==cancha.Id)
+                    {
+                        _context.TurnoReservados.Remove(tur);
+                    }
+                }
+
                 _context.Cancha.Remove(cancha);
             }
             
@@ -168,6 +178,11 @@ namespace CanchaApp.Controllers
         private bool CanchaExists(int id)
         {
           return (_context.Cancha?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public List<TurnoReservado> obtenerTurnoR()
+        {
+            return _context.TurnoReservados.ToList();
         }
     }
 }

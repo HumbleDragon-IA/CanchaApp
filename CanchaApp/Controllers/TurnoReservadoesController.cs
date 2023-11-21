@@ -52,29 +52,38 @@ namespace CanchaApp.Controllers
             {
                 return NotFound();
             }
-
+            
             var turnoReservado = await _context.TurnoReservados
                 .Include(t => t.IdCanchaNavigation)
                 .Include(t => t.IdUsuarioNavigation)
                 .Include(t => t.IdCanchaNavigation.IdCapacidadNavigation)
                 .Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation)
-                
+              
                 
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (turnoReservado == null)
             {
                 return NotFound();
             }
-
+            var horario = obtenerHorario(turnoReservado.IdTurno);
+            ViewData["IdTurno"] = horario;
+           
             return View(turnoReservado);
         }
 
+        private TimeSpan? obtenerHorario(int id)
+        {
+            List < Turno > turnos = obtenerTurno();
+            var hora = turnos[id].HoraInicio;
+
+            return hora;
+        }
         // GET: TurnoReservadoes/Create
         public IActionResult Create()
         {
             ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id");
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id");
-            ViewData["IdTurno"] = new SelectList(_context.Usuario, "Id", "Id");
+            ViewData["IdTurno"] = new SelectList(_context.Turnos, "Id", "Id");
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
             ViewBag.Usuarios = obtenerUsuario();
@@ -240,24 +249,21 @@ namespace CanchaApp.Controllers
             var canchas = obtenerCancha();
             var capacidades = _context.Capacidad.ToList();
             var pisos = _context.TipoPisos.ToList();
-
+            var precio = 0;
             foreach (var cancha in canchas)
             {
                 canchaAuxes.Add(new CanchaAux()
                 {
                     cancha = cancha,
                     capacidad = (int)(_context.Capacidad.FirstOrDefault(c => c.Id == cancha.IdCapacidad)?.Tamaño),
-                    piso = _context.TipoPisos.FirstOrDefault(p => p.Id == cancha.IdTipoPiso)?.TipoPiso1
-
-                });
+                    piso = _context.TipoPisos.FirstOrDefault(p => p.Id == cancha.IdTipoPiso)?.TipoPiso1,
+                    precio = (double)cancha.Precio
+                }) ;
             }
             return canchaAuxes;
         }
 
-        private Boolean tieneTurno(Usuario  u)
-        {
-            return !u.TurnoReservados.IsNullOrEmpty();
-        }
+        
     }
     public class CanchaAux
     {
@@ -265,6 +271,6 @@ namespace CanchaApp.Controllers
         public int capacidad { get; set; }
         public String piso { get; set; }
 
-
+        public double precio { get; set; }
     }
 }

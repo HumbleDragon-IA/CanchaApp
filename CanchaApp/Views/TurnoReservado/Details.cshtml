@@ -4,35 +4,41 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1></h1>
 
 <div>
-    <h4>TurnoReservado</h4>
+    <h4>Detalles del Turno</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTurno)
+            @Html.DisplayNameFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdTurno)
+            @Html.DisplayFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño) -
+
             @Html.DisplayNameFor(model => model.IdCanchaNavigation.IdTipoPisoNavigation.TipoPiso1)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdCanchaNavigation.IdCapacidadNavigation.Tamaño) -
+
             @Html.DisplayFor(model => model.IdCanchaNavigation.IdTipoPisoNavigation.TipoPiso1)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Apellido)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuarioNavigation.Id)
+            @Html.DisplayFor(model => model.IdUsuarioNavigation.Apellido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdUsuarioNavigation.Nombre)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |
+    <a asp-action="Index">Volver a la Lista</a>
 </div>

@@ -145,8 +145,24 @@ namespace CanchaApp.Controllers
                 return Problem("Entity set 'CanchaAppContext.TipoPisos'  is null.");
             }
             var tipoPiso = await _context.TipoPisos.FindAsync(id);
+            var turnos = obtenerTurnoR();
+            var canchas = obtenerCanchaR();
+
             if (tipoPiso != null)
             {
+                foreach (var can in canchas)
+                {
+                    if (can.IdTipoPiso == tipoPiso.Id) {
+                        foreach (var tur in turnos)
+                        {
+                            if(tur.IdCancha==can.Id)
+                            _context.TurnoReservados.Remove(tur);
+                        }
+
+                        _context.Cancha.Remove(can);
+                    }
+                }
+                             
                 _context.TipoPisos.Remove(tipoPiso);
             }
             
@@ -157,6 +173,15 @@ namespace CanchaApp.Controllers
         private bool TipoPisoExists(int id)
         {
           return (_context.TipoPisos?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public List<TurnoReservado> obtenerTurnoR()
+        {
+            return _context.TurnoReservados.ToList();
+        }
+
+        public List<Cancha> obtenerCanchaR()
+        {
+            return _context.Cancha.ToList();
         }
     }
 }
