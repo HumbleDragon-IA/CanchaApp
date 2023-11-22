@@ -7,7 +7,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Turnos</h1>
+<h4>Listado de Turnos</h4>
 <table style="width:100%">
     <tr>
         <td style="width:10%">
@@ -32,7 +32,9 @@
 <table class="table">
     <thead>
         <tr>
-
+            <th>
+                Horario
+            </th>
             <th>
                 Tamaño Cancha
             </th>
@@ -54,10 +56,28 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach (var item in Model)
         {
             <tr>
 
+
+                @{
+                    TimeSpan horario = new TimeSpan();
+                    
+                    foreach (var turnos in ViewBag.Turnos)
+                    {
+                        
+                        if (turnos.Id == item.IdTurno)
+                        {
+                            horario = turnos.HoraInicio;
+                        }
+                    }
+                    }
+                
+                <td>
+                    @Html.DisplayFor(modelItem => horario)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IdCanchaNavigation.IdCapacidadNavigation.Tamaño)
                 </td>
@@ -84,6 +104,8 @@
         }
     </tbody>
 </table>
+
+
 @section Scripts {
     <script>
         document.getElementById('orderBySelect').addEventListener('change', function () {

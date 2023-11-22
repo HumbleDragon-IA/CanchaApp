@@ -7,7 +7,7 @@ public partial class Turno
 {
     public int Id { get; set; }
 
-    public TimeSpan? HoraInicio { get; set; }
+    public TimeSpan HoraInicio { get; set; }
 
    
 }

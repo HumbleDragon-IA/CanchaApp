@@ -26,6 +26,7 @@ namespace CanchaApp.Controllers
         {
             var canchaAppContext = _context.TurnoReservados.Include(t => t.IdCanchaNavigation).Include(t => t.IdUsuarioNavigation).Include(t => t.IdCanchaNavigation.IdCapacidadNavigation).Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation);
             var canchas = await canchaAppContext.ToListAsync();
+            
             if (!string.IsNullOrEmpty(orderBy))
             {
                 switch (orderBy)
@@ -40,6 +41,7 @@ namespace CanchaApp.Controllers
 
                 }
             }
+            ViewBag.Turnos = obtenerTurno();
             return View(canchas);
             //return View(await canchaAppContext.ToListAsync());
         }
@@ -65,19 +67,12 @@ namespace CanchaApp.Controllers
             {
                 return NotFound();
             }
-            var horario = obtenerHorario(turnoReservado.IdTurno);
-            ViewData["IdTurno"] = horario;
+           
            
             return View(turnoReservado);
         }
 
-        private TimeSpan? obtenerHorario(int id)
-        {
-            List < Turno > turnos = obtenerTurno();
-            var hora = turnos[id].HoraInicio;
-
-            return hora;
-        }
+        
         // GET: TurnoReservadoes/Create
         public IActionResult Create()
         {
@@ -227,7 +222,20 @@ namespace CanchaApp.Controllers
         }
 
 
+        public TimeSpan obtenerHorario(int id)
+        {
+            var turnos = obtenerTurno();
+            TimeSpan hora= new TimeSpan();
+            foreach (var tur in turnos)
+            {
+                if (tur.Id== id)
+                {
+                    hora = tur.HoraInicio;
+                }
+            }
 
+            return hora;
+        }
         public List<Turno> obtenerTurno()
         {
             return _context.Turnos.ToList();

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1></h1>
 
-<h4>Capacidad</h4>
+<h4>Editar Capacidad</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,18 +15,27 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Tamaño" class="control-label"></label>
-                <input asp-for="Tamaño" class="form-control" />
+                @* <input asp-for="Tamaño" class="form-control" /> *@
+                <select asp-for="Tamaño" class="form-control" id="TamañoSelect">
+                    <option value="">Seleccione Tamaño Cancha</option>
+                    @{
+                        foreach (var cap in ViewBag.Capacidades)
+                        {
+                            <option value="@cap.Id">@cap.Tamaño </option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Tamaño" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver al Listado</a>
 </div>
 
 @section Scripts {

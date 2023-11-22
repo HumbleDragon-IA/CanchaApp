@@ -36,24 +36,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuY2hhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidads/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkc1xDcmVhdGUuY3NodG1s
+[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidad/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidads/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkc1xEZWxldGUuY3NodG1s
+[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidad/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidads/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkc1xEZXRhaWxzLmNzaHRtbA==
+[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidad/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidads/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkc1xFZGl0LmNzaHRtbA==
+[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidad/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidads/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkc1xJbmRleC5jc2h0bWw=
+[L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Capacidad/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FwYWNpZGFkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [L:/Repositorio VS STUDIO/CanchaApp/CanchaApp/Views/Home/Index.cshtml]

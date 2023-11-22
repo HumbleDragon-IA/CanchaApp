@@ -47,6 +47,7 @@ namespace CanchaApp.Controllers
         // GET: TipoPiso/Create
         public IActionResult Create()
         {
+            ViewBag.TipoPisos = obtenerTipoPiso();
             return View();
         }
 
@@ -63,6 +64,8 @@ namespace CanchaApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.TipoPisos = obtenerTipoPiso();
             return View(tipoPiso);
         }
 
@@ -79,6 +82,7 @@ namespace CanchaApp.Controllers
             {
                 return NotFound();
             }
+            ViewBag.TipoPisos = obtenerTipoPiso();
             return View(tipoPiso);
         }
 
@@ -114,6 +118,7 @@ namespace CanchaApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.TipoPisos = obtenerTipoPiso();
             return View(tipoPiso);
         }
 
@@ -182,6 +187,10 @@ namespace CanchaApp.Controllers
         public List<Cancha> obtenerCanchaR()
         {
             return _context.Cancha.ToList();
+        }
+        public List<TipoPiso> obtenerTipoPiso()
+        {
+            return _context.TipoPisos.ToList();
         }
     }
 }

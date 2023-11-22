@@ -27,4 +27,5 @@ public partial class TurnoReservado
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
     
+    
 }

@@ -47,6 +47,7 @@ namespace CanchaApp.Controllers
         // GET: Capacidad/Create
         public IActionResult Create()
         {
+            ViewBag.Capacidades = obtenerCapacidad();
             return View();
         }
 
@@ -63,6 +64,7 @@ namespace CanchaApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Capacidades = obtenerCapacidad();
             return View(capacidad);
         }
 
@@ -79,6 +81,7 @@ namespace CanchaApp.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Capacidades = obtenerCapacidad();
             return View(capacidad);
         }
 
@@ -114,6 +117,7 @@ namespace CanchaApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Capacidades = obtenerCapacidad();
             return View(capacidad);
         }
 
@@ -145,8 +149,25 @@ namespace CanchaApp.Controllers
                 return Problem("Entity set 'CanchaAppContext.Capacidad'  is null.");
             }
             var capacidad = await _context.Capacidad.FindAsync(id);
+            var turnos = obtenerTurnoR();
+            var canchas = obtenerCanchaR();
             if (capacidad != null)
             {
+                foreach (var can in canchas)
+                {
+                    if (can.IdCapacidad == capacidad.Id)
+                    {
+                        foreach (var tur in turnos)
+                        {
+                            if (tur.IdCancha == can.Id)
+                                _context.TurnoReservados.Remove(tur);
+                        }
+
+                        _context.Cancha.Remove(can);
+                    }
+                }
+
+
                 _context.Capacidad.Remove(capacidad);
             }
             
@@ -157,6 +178,19 @@ namespace CanchaApp.Controllers
         private bool CapacidadExists(int id)
         {
           return (_context.Capacidad?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        public List<TurnoReservado> obtenerTurnoR()
+        {
+            return _context.TurnoReservados.ToList();
+        }
+
+        public List<Cancha> obtenerCanchaR()
+        {
+            return _context.Cancha.ToList();
+        }
+        public List<Capacidad> obtenerCapacidad()
+        {
+            return _context.Capacidad.ToList();
         }
     }
 }

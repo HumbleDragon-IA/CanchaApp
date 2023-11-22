@@ -50,6 +50,8 @@ namespace CanchaApp.Controllers
         {
             ViewData["IdCapacidad"] = new SelectList(_context.Capacidad, "Id", "Id");
             ViewData["IdTipoPiso"] = new SelectList(_context.TipoPisos, "Id", "Id");
+            ViewBag.Capacidades = obtenerCapacidad();
+            ViewBag.TipoPisos = obtenerTipoPiso();
             return View();
         }
 
@@ -60,15 +62,17 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdCapacidad,IdTipoPiso,Precio")] Cancha cancha)
         {
-            if (ModelState.IsValid)
-            {
+           // if (ModelState.IsValid)
+          //  {
                 _context.Add(cancha);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["IdCapacidad"] = new SelectList(_context.Capacidad, "Id", "Id", cancha.IdCapacidadNavigation.Tamaño);
             ViewData["IdTipoPiso"] = new SelectList(_context.TipoPisos, "Id", "Id", cancha.IdTipoPisoNavigation.TipoPiso1);
-            return View(cancha);
+            ViewBag.Capacidades = obtenerCapacidad();
+            ViewBag.TipoPisos = obtenerTipoPiso();
+         //   return View(cancha);
         }
 
         // GET: Cancha/Edit/5
@@ -86,6 +90,9 @@ namespace CanchaApp.Controllers
             }
             ViewData["IdCapacidad"] = new SelectList(_context.Capacidad, "Id", "Id", cancha.IdCapacidad);
             ViewData["IdTipoPiso"] = new SelectList(_context.TipoPisos, "Id", "Id", cancha.IdTipoPiso);
+            ViewBag.Capacidades = obtenerCapacidad();
+            ViewBag.TipoPisos = obtenerTipoPiso();
+
             return View(cancha);
         }
 
@@ -101,29 +108,31 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+          //  if (ModelState.IsValid)
             {
-                try
-                {
+             //   try
+               // {
                     _context.Update(cancha);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CanchaExists(cancha.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+               // }
+              //  catch (DbUpdateConcurrencyException)
+              //  {
+                //    if (!CanchaExists(cancha.Id))
+               //     {
+                //        return NotFound();
+                //    }
+                //    else
+                  //  {
+                  //      throw;
+                   // }
+              //  }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCapacidad"] = new SelectList(_context.Capacidad, "Id", "Id", cancha.IdCapacidad);
             ViewData["IdTipoPiso"] = new SelectList(_context.TipoPisos, "Id", "Id", cancha.IdTipoPiso);
-            return View(cancha);
+            ViewBag.Capacidades = obtenerCapacidad();
+            ViewBag.TipoPisos = obtenerTipoPiso();
+            //  return View(cancha);
         }
 
         // GET: Cancha/Delete/5
@@ -183,6 +192,15 @@ namespace CanchaApp.Controllers
         public List<TurnoReservado> obtenerTurnoR()
         {
             return _context.TurnoReservados.ToList();
+        }
+
+        public List<Capacidad> obtenerCapacidad()
+        {
+            return _context.Capacidad.ToList();
+        }
+        public List<TipoPiso> obtenerTipoPiso()
+        {
+            return _context.TipoPisos.ToList();
         }
     }
 }
