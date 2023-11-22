@@ -20,3 +20,57 @@ body {
     margin-bottom: 60px;
 }
 
+.row {
+    
+    padding: 25px;
+}
+
+.table {
+    background-color: ghostwhite;
+    box-sizing: border-box;
+    border-radius: 3px;
+    opacity: .92;
+    width: 1000px;
+    box-shadow: 0.5px 0.5px 0px rgba(53, 255, 3, 0.979), 1px 1px 0px rgba(49, 233, 3, 0.979), 2px 2px 0px rgba(40, 190, 3, 0.979), 3px 3px 0px rgba(43, 184, 8, 0.979), 4px 4px 0px rgba(32, 151, 3, 0.979), 5px 5px 0px rgba(26, 124, 1, 0.979), 6px 6px 0px rgba(12, 59, 1, 0.979), 7px 7px 0px rgba(10, 49, 1, 0.979), 8px 8px 0px rgba(5, 24, 0, 0.979), 9px 9px 0px black
+}
+
+.home {
+    text-align: center;
+    background-color: ghostwhite;
+    padding: 15px;
+    font-size: 25px;
+}
+
+#footer {
+    background-color: whitesmoke;
+    opacity: 0.85
+    
+}
+.header {
+    font-weight: bold;
+  
+    
+}
+#aca {
+    opacity: .85;
+}
+
+.marco{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.botOrdenar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: right;
+}
+
+dl {
+    padding-left: 10px;
+}
+.separador{
+    margin-top:10px;
+}

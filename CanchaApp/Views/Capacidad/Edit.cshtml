@@ -8,6 +8,8 @@
 
 <h4>Editar Capacidad</h4>
 <hr />
+<div class="marco">
+    <div class="table">
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -15,27 +17,20 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Tamaño" class="control-label"></label>
-                @* <input asp-for="Tamaño" class="form-control" /> *@
-                <select asp-for="Tamaño" class="form-control" id="TamañoSelect">
-                    <option value="">Seleccione Tamaño Cancha</option>
-                    @{
-                        foreach (var cap in ViewBag.Capacidades)
-                        {
-                            <option value="@cap.Id">@cap.Tamaño </option>
-                        }
-                    }
-                </select>
+                <input asp-for="Tamaño" class="form-control" />
+               
                 <span asp-validation-for="Tamaño" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-success m-1" />
             </div>
         </form>
     </div>
 </div>
-
+    </div>
+</div>
 <div>
-    <a asp-action="Index">Volver al Listado</a>
+    <a asp-action="Index" class="btn btn-primary">Volver al Listado</a>
 </div>
 
 @section Scripts {

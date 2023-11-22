@@ -10,6 +10,8 @@
 <div>
     <h4>Capacidad</h4>
     <hr />
+    <div class="marco">
+        <div class="table">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Tamaño)
@@ -18,10 +20,15 @@
             @Html.DisplayFor(model => model.Tamaño)
         </dd>
     </dl>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Eliminar" class="btn btn-danger m-1" /> 
+
+            </form>
+        </div>
+    </div>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver al Listado</a>
-    </form>
+ 
+    <div>
+    <a asp-action="Index" class="btn btn-primary">Volver al Listado</a>
 </div>

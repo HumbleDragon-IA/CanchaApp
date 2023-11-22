@@ -58,7 +58,7 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Tamaño")] Capacidad capacidad)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && capacidad.Tamaño>=0)
             {
                 _context.Add(capacidad);
                 await _context.SaveChangesAsync();
@@ -97,7 +97,7 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && capacidad.Tamaño >= 0)
             {
                 try
                 {

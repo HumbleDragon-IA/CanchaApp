@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\image\\cancha2.jpg"
     },
     {
+      "Id": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\wwwroot\\css\\image\\pelota.png",
+      "PackagePath": "staticwebassets\\css\\image\\pelota.png"
+    },
+    {
       "Id": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

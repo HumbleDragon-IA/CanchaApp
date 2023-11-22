@@ -11,6 +11,8 @@
 <div>
     <h4>Cancha</h4>
     <hr />
+    <div class="marco">
+        <div class="table">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Precio)
@@ -31,10 +33,14 @@
             @Html.DisplayFor(model => model.IdTipoPisoNavigation.TipoPiso1)
         </dd>
     </dl>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Eliminar Cancha" class="btn btn-danger" />
+
+            </form>
+        </div>
+    </div>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar Cancha" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la Lista</a>
-    </form>
+    <div>
+        <a asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
 </div>

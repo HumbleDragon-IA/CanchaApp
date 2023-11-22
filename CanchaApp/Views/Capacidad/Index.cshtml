@@ -7,8 +7,9 @@
 <h4>Capacidad Cancha</h4>
 
 <p>
-    <a asp-action="Create">Crear nueva Capacidad</a>
+    <a asp-action="Create" class="btn btn-success">Crear nueva Capacidad</a>
 </p>
+<div class="marco">
 <table class="table">
     <thead>
         <tr>
@@ -25,11 +26,12 @@
                 @Html.DisplayFor(modelItem => item.Tamaño)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id " class="btn btn-primary">Editar Tamaño</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar Tamaño</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

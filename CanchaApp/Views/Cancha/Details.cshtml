@@ -9,6 +9,8 @@
 <div>
     <h4>Detalle de Cancha</h4>
     <hr />
+    <div class="marco">
+        <div class="table">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Precio)
@@ -29,8 +31,11 @@
             @Html.DisplayFor(model => model.IdTipoPisoNavigation.TipoPiso1)
         </dd>
     </dl>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning m-1">Editar</a> 
+</div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |
-    <a asp-action="Index">Volver a la Lista</a>
+    
+    <a asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
 </div>

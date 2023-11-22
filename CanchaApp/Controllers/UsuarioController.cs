@@ -26,8 +26,30 @@ namespace CanchaApp.Controllers
               return _context.Usuario != null ? 
                           View(await _context.Usuario.ToListAsync()) :
                           Problem("Entity set 'CanchaAppContext.Usuario'  is null.");
+
+            
         }
 
+        //public async Task<IActionResult> TurnosUsuario(int id)
+        //{
+        //    if (id == null || _context.Usuario == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var usuario = await _context.Usuario
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (usuario == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ViewBag.TurnosUsuario = obtenerTurnoUs(id);
+        //    ViewBag.Turnos = obtenerTurno();
+        //    ViewBag.Canchas = obtenerCancha();
+        //    var turnos = ViewBag.TurnosUsuario;
+        //    return View(turnos);
+
+        //}
         // GET: Usuario/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -177,6 +199,20 @@ namespace CanchaApp.Controllers
         {
             return _context.TurnoReservados.ToList();
         }
+        public List<TurnoReservado> obtenerTurnoUs(int id)
+        {
+            return _context.TurnoReservados.Where(u=> u.IdUsuario == id).ToList();
+        }
+        public List<Turno> obtenerTurno()
+        {
+            return _context.Turnos.ToList();
+        }
+
+        public List<Cancha> obtenerCancha()
+        {
+            return _context.Cancha.ToList();
+        }
+
     }
    
 }

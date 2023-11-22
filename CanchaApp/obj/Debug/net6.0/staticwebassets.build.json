@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YwGYipfO7AZ6wn4YjN3zzJOAyyErQ3d8bYykfEz/rUA=",
+  "Hash": "Y4eHGl20n2E+16gpkBsAFDrIYX66Ytqdb/z9ZLeot3g=",
   "Source": "CanchaApp",
   "BasePath": "_content/CanchaApp",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\image\\cancha2.jpg"
+    },
+    {
+      "Identity": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\wwwroot\\css\\image\\pelota.png",
+      "SourceId": "CanchaApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\wwwroot\\",
+      "BasePath": "_content/CanchaApp",
+      "RelativePath": "css/image/pelota.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\image\\pelota.png"
     },
     {
       "Identity": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\wwwroot\\css\\site.css",

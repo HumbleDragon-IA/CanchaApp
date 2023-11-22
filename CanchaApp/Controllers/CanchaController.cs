@@ -62,17 +62,19 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdCapacidad,IdTipoPiso,Precio")] Cancha cancha)
         {
-           // if (ModelState.IsValid)
-          //  {
+            //if (ModelState.IsValid)
+            //{
+            
                 _context.Add(cancha);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             //}
             ViewData["IdCapacidad"] = new SelectList(_context.Capacidad, "Id", "Id", cancha.IdCapacidadNavigation.Tamaño);
             ViewData["IdTipoPiso"] = new SelectList(_context.TipoPisos, "Id", "Id", cancha.IdTipoPisoNavigation.TipoPiso1);
+            
             ViewBag.Capacidades = obtenerCapacidad();
             ViewBag.TipoPisos = obtenerTipoPiso();
-         //   return View(cancha);
+            //return View(cancha);
         }
 
         // GET: Cancha/Edit/5

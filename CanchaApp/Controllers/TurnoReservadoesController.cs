@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CanchaApp.Modelo;
 using System.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CanchaApp.Controllers
 {
@@ -38,7 +39,12 @@ namespace CanchaApp.Controllers
                     case "MenorPrecio":
                         canchas = canchas.OrderBy(o => o.IdCanchaNavigation.Precio).ToList();
                         break;
-
+                    case "MayorHorario":
+                        canchas = canchas.OrderByDescending(o => o.IdTurno).ToList();
+                        break;
+                    case "MenorHorario":
+                        canchas = canchas.OrderBy(o => o.IdTurno).ToList();
+                        break;
                 }
             }
             ViewBag.Turnos = obtenerTurno();
@@ -141,7 +147,7 @@ namespace CanchaApp.Controllers
                 return NotFound();
             }
 
-           // if (ModelState.IsValid)
+          
             {
                 try
                 {
@@ -150,15 +156,7 @@ namespace CanchaApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 { Console.WriteLine("aca rompe"); }
-                //    if (!TurnoReservadoExists(turnoReservado.Id))
-                //   {
-                //      return NotFound();
-                //  }
-                //  else
-                //  {
-                //      throw;
-                // }
-                // }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
@@ -166,7 +164,7 @@ namespace CanchaApp.Controllers
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
             ViewBag.Usuarios = obtenerUsuario();
-            // return View(turnoReservado);
+          
         }
 
         // GET: TurnoReservadoes/Delete/5
@@ -181,6 +179,8 @@ namespace CanchaApp.Controllers
             var turnoReservado = await _context.TurnoReservados
                 .Include(t => t.IdCanchaNavigation)
                 .Include(t => t.IdUsuarioNavigation)
+                .Include(t => t.IdCanchaNavigation.IdCapacidadNavigation)
+                .Include(t => t.IdCanchaNavigation.IdTipoPisoNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var usuario = _context.Usuario.Where(u => u.Id == turnoReservado.IdUsuario);

@@ -8,6 +8,9 @@
 
 <h4>Crear Nuevo Turno</h4>
 <hr />
+
+<div class="marco">
+    <div class="table">
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -55,14 +58,16 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Crear Turno" class="btn btn-primary" />
+                <input type="submit" value="Crear Turno" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
+    </div>
+</div>
 
 <div>
-    <a asp-action="Index">Volver a la Lista</a>
+    <a asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
 </div>
 
 @section Scripts {
