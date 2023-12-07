@@ -23,7 +23,7 @@
                     @{
                         foreach (var usuarios in ViewBag.Usuarios)
                         {
-                            <option value="@usuarios.Id">@usuarios.Nombre @usuarios.Apellido</option>
+                                    <option value="@usuarios.Id">@usuarios.Nombre @usuarios.Apellido</option>
                         }
                     }
                 </select>
@@ -36,7 +36,7 @@
                     @{
                         foreach (var turnos in ViewBag.Turnos)
                         {
-                            <option value="@turnos.Id">@turnos.HoraInicio</option>
+                                    <option value="@turnos.Id">@turnos.HoraInicio</option>
                         }
                     }
                 </select>
@@ -51,7 +51,7 @@
                     @{
                         foreach (var canchas in ViewBag.Canchas)
                         {
-                            <option value="@canchas.cancha.Id">'Piso: '@canchas.piso 'Tamaño: '@canchas.capacidad 'Precio: '@canchas.precio</option>
+                                    <option value="@canchas.cancha.Id">'Piso: '@canchas.piso 'Tamaño: '@canchas.capacidad 'Precio: '@canchas.precio</option>
                         }
                     }
                 </select>
@@ -73,5 +73,16 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
     }
+    @if ((ViewBag.Existe!=null && ViewBag.Existe))
+    {
+        <script>
+            alert('El turno ya existe');
+        </script>
+    }
+
+   
+   
 }
+
