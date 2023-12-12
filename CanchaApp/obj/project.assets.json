@@ -11427,19 +11427,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trompe\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\CanchaApp.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\CanchaApp\\CanchaApp\\CanchaApp.csproj",
       "projectName": "CanchaApp",
-      "projectPath": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\CanchaApp.csproj",
-      "packagesPath": "C:\\Users\\trompe\\.nuget\\packages\\",
-      "outputPath": "L:\\Repositorio VS STUDIO\\CanchaApp\\CanchaApp\\obj\\",
+      "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\CanchaApp\\CanchaApp\\CanchaApp.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\CanchaApp\\CanchaApp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\trompe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

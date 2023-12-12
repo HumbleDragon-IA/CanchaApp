@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CanchaApp.Modelo;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CanchaApp.Controllers
 {
@@ -58,15 +60,40 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TipoPiso1,tipoDePiso")] TipoPiso tipoPiso)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(tipoPiso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            if(!tipoPiso.TipoPiso1.IsNullOrEmpty()) {
 
+                if (ModelState.IsValid && !coincidePiso(tipoPiso.TipoPiso1))
+                {
+                    _context.Add(tipoPiso);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "El tipo de piso ya existe");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "El tipo de piso no puede ser vacio");
+            }
+          
+            
             ViewBag.TipoPisos = obtenerTipoPiso();
             return View(tipoPiso);
+        }
+
+        private Boolean coincidePiso(String tipoPiso) {
+            var list = obtenerTipoPiso();
+            Boolean coincide = false;
+            foreach (var item in list)
+            {
+                if (item.TipoPiso1 == tipoPiso)
+                {
+                    coincide = true;
+                }
+            }
+            return coincide;
         }
 
         // GET: TipoPiso/Edit/5
