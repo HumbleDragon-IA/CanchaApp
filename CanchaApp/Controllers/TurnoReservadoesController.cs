@@ -78,7 +78,7 @@ namespace CanchaApp.Controllers
             return View(turnoReservado);
         }
 
-        
+
         // GET: TurnoReservadoes/Create
         public IActionResult Create()
         {
@@ -88,14 +88,18 @@ namespace CanchaApp.Controllers
             ViewBag.Turnos = obtenerTurno();
             ViewBag.Canchas = obtenerCanchaAux();
             ViewBag.Usuarios = obtenerUsuario();
-            ViewBag.TurnosReservados = obtenerTurnoReservado();
-            
+            obtenerTurnoReservado();
+
             return View();
         }
 
-        public List<TurnoReservado> obtenerTurnoReservado()
+        public void obtenerTurnoReservado()
         {
-            return _context.TurnoReservados.ToList();
+            List<TurnoReservado> turnos = _context.TurnoReservados.ToList();
+            List<int> idsTurno = turnos.Select(x => x.IdTurno).ToList();
+            List<int> idsCancha = turnos.Select(x => x.IdCancha).ToList();
+            ViewBag.idsTurnosReservados = idsTurno;
+            ViewBag.idsCancha = idsCancha;
         }
 
         // POST: TurnoReservadoes/Create
@@ -105,7 +109,7 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdUsuario,IdTurno,IdCancha")] TurnoReservado turnoReservado)
         {
-            
+
             if (!existeTurno(turnoReservado))
             {
                 _context.Add(turnoReservado);
@@ -116,34 +120,35 @@ namespace CanchaApp.Controllers
                 ViewBag.Turnos = obtenerTurno();
                 ViewBag.Canchas = obtenerCanchaAux();
                 ViewBag.Usuarios = obtenerUsuario();
-               
                 return RedirectToAction(nameof(Index));
-                //   }
-
 
             }
-            else {
-                ViewBag.Existe = existeTurno(turnoReservado);
-            }
-            
-            return RedirectToAction(nameof(Create));
+            ModelState.AddModelError(string.Empty, "El turno ya existe.");
+            ViewData["IdCancha"] = new SelectList(_context.Cancha, "Id", "Id", turnoReservado.IdCancha);
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdUsuario);
+            ViewData["IdTurno"] = new SelectList(_context.Usuario, "Id", "Id", turnoReservado.IdTurno);
+            ViewBag.Turnos = obtenerTurno();
+            ViewBag.Canchas = obtenerCanchaAux();
+            ViewBag.Usuarios = obtenerUsuario();
+            return View(turnoReservado);
         }
 
-        private Boolean existeTurno (TurnoReservado tr)
+        private Boolean existeTurno(TurnoReservado tr)
         {
             Boolean existe = false;
             var turnos = _context.TurnoReservados.ToList();
             int i = 0;
 
-            foreach (var tur in turnos) { 
-            if(tur.IdCancha == tr.IdCancha && tur.IdTurno == tr.IdTurno)
+            foreach (var tur in turnos)
+            {
+                if (tur.IdCancha == tr.IdCancha && tur.IdTurno == tr.IdTurno)
                 {
                     existe = true;
                 }
             }
-                
+
             return existe;
-         
+
         }
         // GET: TurnoReservadoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
