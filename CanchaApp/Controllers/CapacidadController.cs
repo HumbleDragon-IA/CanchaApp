@@ -58,16 +58,37 @@ namespace CanchaApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Tamaño")] Capacidad capacidad)
         {
-            if (ModelState.IsValid && capacidad.Tamaño>=0)
+            if (capacidad.Tamaño >= 0 && capacidad.Tamaño.HasValue)
             {
-                _context.Add(capacidad);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid && !coincideTamanio(capacidad.Tamaño))
+                {
+                    _context.Add(capacidad);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else {
+                    ModelState.AddModelError(string.Empty, "El tamanio de cancha no puede repetirse");
+                }
             }
+            else {
+                ModelState.AddModelError(string.Empty, "El tamanio de cancha no puede ser vacio");
+            }
+
             ViewBag.Capacidades = obtenerCapacidad();
             return View(capacidad);
         }
-
+        private Boolean coincideTamanio(int? tamanio) {
+            var list = obtenerCapacidad();
+            Boolean coincide = false;
+            foreach (var item in list)
+            {
+                if (item.Tamaño == tamanio)
+                {
+                    coincide = true;
+                }
+            }
+            return coincide;
+        }
         // GET: Capacidad/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
